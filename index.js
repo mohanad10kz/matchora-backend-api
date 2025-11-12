@@ -61,6 +61,25 @@ app.get('/api/match/:matchId', async (req, res) => {
   }
 });
 
+app.get('/api/image', async (req, res) => {
+  try {
+    const imagePath = req.query.path;
+    if (!imagePath) {
+      return res.status(400).send('Image path is required');
+    }
+    const imageUrl = `https://www.yalla-shoot-365.com${imagePath}`;
+    const response = await axios({
+      method: 'GET',
+      url: imageUrl,
+      responseType: 'stream',
+    });
+    response.data.pipe(res);
+  } catch (error) {
+    console.error('Error fetching image:', error);
+    res.status(500).send('Failed to fetch image');
+  }
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
