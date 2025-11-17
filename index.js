@@ -82,7 +82,7 @@ app.get("/api/image", async (req, res) => {
     response.data.pipe(res);
   } catch (error) {
     console.error("Error fetching image:", error);
-    res.status(500).send("Failed to fetch image");
+    res.status(500).send("Failed to fetch image ");
   }
 });
 
