@@ -9,6 +9,29 @@ const PORT = process.env.PORT || 3000;
 // Enable CORS for all routes
 app.use(cors());
 
+// --- 2. (جديد) الحارس الأمني (Middleware) ---
+const apiKeyMiddleware = (req, res, next) => {
+  // استثناء مسار الصور من الحماية
+  if (req.path.startsWith("/api/image")) {
+    return next();
+  }
+  // نقرأ المفتاح القادم من التطبيق
+  const requestKey = req.headers["x-api-key"];
+  // نقرأ المفتاح الأصلي من السيرفر
+  const secretKey = process.env.API_KEY;
+
+  if (requestKey && requestKey === secretKey) {
+    next(); // المفتاح صحيح، تفضل بالدخول
+  } else {
+    // المفتاح خطأ أو غير موجود! طرده فوراً
+    res.status(403).json({ error: "Forbidden: Invalid or Missing API Key" });
+  }
+};
+
+// تطبيق الحارس على جميع المسارات
+app.use(apiKeyMiddleware);
+// --- نهاية الحارس الأمني ---
+
 // Define the API route
 app.get("/api/matches/today", async (req, res) => {
   try {
