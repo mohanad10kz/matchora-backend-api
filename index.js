@@ -80,6 +80,29 @@ app.get('/api/image', async (req, res) => {
   }
 });
 
+const LEAGUE_PRIORITIES = {
+  // La Liga
+  11: { priority: 90 },
+  // Premier League
+  7: { priority: 100 },
+  // UEFA Champions League
+  572: { priority: 120 },
+  // Serie A
+  17: { priority: 85 },
+  // Bundesliga
+  25: { priority: 80 },
+  // Ligue 1
+  35: { priority: 75 },
+  // Saudi Pro League
+  649: { priority: 50 },
+  // تصفيات اوروبا لكأس العالم
+  5421: { priority: 95 },
+};
+
+app.get('/api/league-priorities', (req, res) => {
+  res.json(LEAGUE_PRIORITIES);
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
