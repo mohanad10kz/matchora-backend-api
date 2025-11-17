@@ -103,6 +103,10 @@ app.get('/api/league-priorities', (req, res) => {
   res.json(LEAGUE_PRIORITIES);
 });
 
+app.get('/api/download-url', (req, res) => {
+  res.json({ url: 'https://app.com' });
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
