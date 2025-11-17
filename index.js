@@ -111,7 +111,7 @@ app.get("/api/league-priorities", (req, res) => {
 
 app.get("/api/download-url", (req, res) => {
   res.json({
-    url: "https://expo.dev/accounts/mohanad_kz/projects/matchora/builds/82a40c2f-5364-4dfc-bbe2-029c17e8a76f",
+    url: "https://expo.dev/accounts/mohanad_kz/projects/matchora/builds/62270929-017c-4588-8bf8-f8d3bfa731da",
   });
 });
 
